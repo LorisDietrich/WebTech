@@ -1,0 +1,54 @@
+<div *ngFor="let product of products">
+<!--<p>{{product | json}}</p>-->
+
+</div>
+
+<div class="tab-content container" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <div class="row grid-view theme1">
+          <div class="col-sm-6 col-md-4 mb-30" *ngFor="let product of products">
+              <div class="card product-card">
+                  <div class="card-body">
+                      <div class="product-thumbnail position-relative">
+                          <span *ngIf="!toogleWeek" class="badge badge-danger top-right">Nouveau {{d | date}} - {{product.release_date | date}}</span>
+                          <!--<span *ngIf="!toogleWeek" class="badge badge-danger top-right">Nouveau {{d | date}} - {{product.release_date | date}}</span>-->
+                          <a>
+                              <!--<img class="first-img" width="420" [src]="prefUrlImage + product.id + fin" alt="image a placer">-->
+                              <img class="first-img" width="420" [src]="prefUrlImage + product.id_item + fin" alt="image a placer">
+                          </a>
+                          <!-- product links -->
+                          <ul class="product-links d-flex justify-content-center">
+
+                              <li>
+                                  <a href="#" data-toggle="modal" [attr.data-target]="'#quick-view-'+product.id_item">
+                                      <span data-toggle="tooltip" data-placement="bottom" title="Quick view" class="icon-magnifier"></span>
+                                  </a>
+                              </li>
+                          </ul>
+                          <!-- product links end-->
+                      </div>
+                      <div class="product-desc py-0">
+                          <h3 class="title"><a href="">{{ product.name }}</a></h3>
+                          <!--
+                          <div class="star-rating">
+                              <span class="ion-ios-star"></span>
+                              <span class="ion-ios-star"></span>
+                              <span class="ion-ios-star"></span>
+                              <span class="ion-ios-star"></span>
+                              <span class="ion-ios-star de-selected"></span>
+                          </div>-->
+                          <div class="d-flex align-items-center justify-content-between">
+                              <h6 class="product-price">{{ product.price + "CHF" }}</h6>
+                              <button class="pro-btn" data-toggle="modal" [attr.data-target]="'#add-to-cart-'+product.id_item"><i class="icon-basket"></i></button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- product-list End -->
+          </div>
+      </div>
+  </div>
+</div>
+
+<app-modal-quick-view [products] ="products"></app-modal-quick-view>
+<app-modal-add-to-cart [products] ="products"></app-modal-add-to-cart>
